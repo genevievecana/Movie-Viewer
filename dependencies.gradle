@@ -50,6 +50,10 @@ ext.deps = [
                 'rxandroid'         :   "io.reactivex.rxjava2:rxandroid:$versions.rxandroid",
                 'rxkotlin'          :   "io.reactivex.rxjava2:rxkotlin:$versions.rxkotlin"
         ],
+        'javax': [
+                'annotation'        :   "javax.annotation:jsr250-api:$versions.javaxAnnotation",
+                'inject'            :   "javax.inject:javax.inject:$versions.javaxInject"
+        ],
         'test'      : [
                 'junit'             :   "junit:junit:$versions.junit",
                 'testRunner'        :   "com.android.support.test:runner:$versions.testRunner",

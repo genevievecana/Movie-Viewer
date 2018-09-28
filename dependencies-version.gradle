@@ -19,9 +19,11 @@ ext.versions = [
         'rxjava'            :   '2.2.2',
         'rxandroid'         :   '2.1.0',
         'rxkotlin'          :   '2.3.0',
+        'javaxAnnotation'   :   '1.0',
+        'javaxInject'       :   '1',
         'junit'             :   '4.12',
         'testRunner'        :   '1.0.2',
         'espresso'          :   '3.0.2-alpha1',
-        'mockito'           :   '2.22.0',
+        'mockito'           :   '2.22.0'
 
 ]

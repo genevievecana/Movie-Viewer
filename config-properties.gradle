@@ -4,7 +4,7 @@ class Config {
 
 ext {
     config = new Config()
-    def basePath = rootDir.absolutePath + "/config/"
+    def basePath = rootDir.absolutePath + "/configuration/"
 
     config.commonProperties = new Properties()
     def propertyFileName = "private-data.properties"

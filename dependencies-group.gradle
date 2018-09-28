@@ -77,6 +77,11 @@ ext{
         implementation deps.rxjava.rxkotlin
     }
 
+    javax = Group {
+        implementation deps.javax.annotation
+        implementation deps.javax.inject
+    }
+
     test = Group {
         testImplementation deps.test.junit
         androidTestImplementation deps.test.testRunner
@@ -96,6 +101,13 @@ ext{
         paging()
         rxjava()
         test()
+    }
+
+    domainDependencies = Group {
+        javax()
+        lifecycle()
+        paging()
+        rxjava()
     }
 
 }
