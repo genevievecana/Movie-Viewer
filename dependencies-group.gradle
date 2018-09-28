@@ -84,4 +84,18 @@ ext{
         testImplementation deps.test.mockito
     }
 
+    appDependencies = Group {
+        libraries()
+        kotlin()
+        support()
+        dagger()
+        retrofit()
+        moshi()
+        room()
+        lifecycle()
+        paging()
+        rxjava()
+        test()
+    }
+
 }

@@ -27,15 +27,5 @@ android {
 }
 
 dependencies {
-    libraries()
-    kotlin()
-    support()
-    dagger()
-    retrofit()
-    moshi()
-    room()
-    lifecycle()
-    paging()
-    rxjava()
-    test()
+    appDependencies()
 }
