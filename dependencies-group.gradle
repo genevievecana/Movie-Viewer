@@ -87,6 +87,15 @@ ext{
         androidTestImplementation deps.test.testRunner
         androidTestImplementation deps.test.espresso
         testImplementation deps.test.mockito
+        testImplementation deps.test.archCoreTesting
+        testImplementation deps.test.googleTruth
+    }
+
+    unitTest = Group {
+        testImplementation deps.test.junit
+        testImplementation deps.test.mockito
+        testImplementation deps.test.archCoreTesting
+        testImplementation deps.test.googleTruth
     }
 
     appDependencies = Group {
@@ -108,6 +117,7 @@ ext{
         lifecycle()
         paging()
         rxjava()
+        unitTest()
     }
 
 }

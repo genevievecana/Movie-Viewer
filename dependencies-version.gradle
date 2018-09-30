@@ -24,6 +24,7 @@ ext.versions = [
         'junit'             :   '4.12',
         'testRunner'        :   '1.0.2',
         'espresso'          :   '3.0.2-alpha1',
-        'mockito'           :   '2.22.0'
+        'mockito'           :   '2.22.0',
+        'googleTruth'       :   '0.42'
 
 ]

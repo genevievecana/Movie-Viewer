@@ -59,6 +59,7 @@ ext.deps = [
                 'testRunner'        :   "com.android.support.test:runner:$versions.testRunner",
                 'espresso'          :   "com.android.support.test.espresso:espresso-core:$versions.espresso",
                 'mockito'           :   "org.mockito:mockito-core:$versions.mockito",
-
+                'archCoreTesting'   :   "android.arch.core:core-testing:$versions.archComponents",
+                'googleTruth'       :   "com.google.truth:truth:$versions.googleTruth"
         ]
 ]
