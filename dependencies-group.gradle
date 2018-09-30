@@ -1,0 +1,123 @@
+def Group(Closure closure) {
+    closure.delegate = dependencies
+    return closure
+}
+
+/**
+ All groups
+
+    libraries()
+    kotlin()
+    support()
+    dagger()
+    retrofit()
+    moshi()
+    room()
+    lifecycle()
+    paging()
+    rxjava()
+    test()
+ **/
+
+ext{
+
+    libraries = Group {
+        implementation deps.libs
+    }
+
+    kotlin = Group {
+        implementation deps.kotlin
+    }
+
+    support = Group {
+        implementation deps.support.appCompat
+        implementation deps.support.design
+        implementation deps.support.cardview
+        implementation deps.support.constraint
+    }
+
+    dagger = Group {
+        implementation deps.dagger.dagger
+        implementation deps.dagger.support
+        kapt deps.dagger.compiler
+        kapt deps.dagger.processor
+        implementation deps.dagger.android
+    }
+
+    retrofit = Group {
+        implementation deps.retrofit.retrofit
+        implementation deps.retrofit.adapter
+    }
+
+    moshi = Group {
+        kapt deps.moshi.kotlin
+        implementation deps.moshi.moshi
+    }
+
+    room = Group {
+        implementation deps.room.room
+        kapt deps.room.compiler
+        implementation deps.room.rxjava2
+    }
+
+    lifecycle = Group {
+        implementation deps.lifecycle.extensions
+        kapt deps.lifecycle.compiler
+        implementation deps.lifecycle.reactivestreams
+    }
+
+    paging = Group {
+        implementation deps.paging.runtime
+        implementation deps.paging.rxjava2
+    }
+
+    rxjava = Group {
+        implementation deps.rxjava.rxjava
+        implementation deps.rxjava.rxandroid
+        implementation deps.rxjava.rxkotlin
+    }
+
+    javax = Group {
+        implementation deps.javax.annotation
+        implementation deps.javax.inject
+    }
+
+    test = Group {
+        testImplementation deps.test.junit
+        androidTestImplementation deps.test.testRunner
+        androidTestImplementation deps.test.espresso
+        testImplementation deps.test.mockito
+        testImplementation deps.test.archCoreTesting
+        testImplementation deps.test.googleTruth
+    }
+
+    unitTest = Group {
+        testImplementation deps.test.junit
+        testImplementation deps.test.mockito
+        testImplementation deps.test.archCoreTesting
+        testImplementation deps.test.googleTruth
+    }
+
+    appDependencies = Group {
+        libraries()
+        kotlin()
+        support()
+        dagger()
+        retrofit()
+        moshi()
+        room()
+        lifecycle()
+        paging()
+        rxjava()
+        test()
+    }
+
+    domainDependencies = Group {
+        javax()
+        lifecycle()
+        paging()
+        rxjava()
+        unitTest()
+    }
+
+}
