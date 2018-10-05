@@ -47,11 +47,18 @@ ext{
     retrofit = Group {
         implementation deps.retrofit.retrofit
         implementation deps.retrofit.adapter
+        implementation deps.retrofit.moshi
+        implementation deps.okHttp.logging
     }
 
     moshi = Group {
         kapt deps.moshi.kotlin
         implementation deps.moshi.moshi
+    }
+
+    kotshi = Group {
+        implementation deps.kotshi.kotshi
+        kapt deps.kotshi.compiler
     }
 
     room = Group {
@@ -118,6 +125,19 @@ ext{
         paging()
         rxjava()
         unitTest()
+    }
+
+    dataDependencies = Group {
+        implementation project(':domain')
+        javax()
+        lifecycle()
+        paging()
+        rxjava()
+        retrofit()
+        moshi()
+        dagger()
+        retrofit()
+        kotshi()
     }
 
 }

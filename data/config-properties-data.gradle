@@ -1,0 +1,20 @@
+class Config {
+    Properties privateProperties
+}
+
+ext {
+    config = new Config()
+    def basePath = rootDir.absolutePath + "/data/configuration/"
+
+    config.privateProperties = new Properties()
+    def propertyFileName = "config-data.properties"
+    config.privateProperties.load(new FileInputStream(rootProject.file((basePath + propertyFileName))))
+}
+
+android {
+    defaultConfig {
+        buildConfigField "String", "API_BASE_URL", config.privateProperties.API_BASE_URL
+        buildConfigField "String", "API_KEY", config.privateProperties.API_KEY
+
+    }
+}
