@@ -42,19 +42,11 @@ class UseCaseTest: BaseTestClass(){
 
     }
 
-    @Test
-    fun nullParams(){
-        expectedException.expect(NullPointerException::class.java)
-        useCase.execute(null)
-                .subscribe()
-
-    }
-
     private class UseCaseClass
     constructor(io: Scheduler)
         : UseCase<Int?, Int>(io){
 
-        override fun getObservable(params: Int?): Observable<Int?> {
+        override fun getObservable(params: Int): Observable<Int?> {
             return Observable.just(params)
         }
 

@@ -59,11 +59,4 @@ class AddMovieListInteractorTest: BaseTestClass(){
         Mockito.verifyNoMoreInteractions(repository)
     }
 
-    @Test
-    fun `fail on null params`(){
-        expectedException.expect(NullPointerException::class.java)
-        interactor.getObservable(null)
-
-    }
-
 }

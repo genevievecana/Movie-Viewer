@@ -28,7 +28,7 @@ class UseCaseCompletableTest: BaseTestClass(){
     fun `test livedata values during execution`(){
         liveData = useCase.loadingLiveData.testObserver()
 
-        useCase.execute(null)
+        useCase.execute(1)
                 .subscribe()
 
         assertBuilder
@@ -45,7 +45,7 @@ class UseCaseCompletableTest: BaseTestClass(){
     constructor(io: Scheduler)
         : UseCaseCompletable<Int>(io){
 
-        override fun getObservable(params: Int?): Completable {
+        override fun getObservable(params: Int): Completable {
             return Completable.complete()
         }
 
