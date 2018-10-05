@@ -1,18 +1,19 @@
 class Config {
-    Properties commonProperties
+    Properties privateProperties
 }
 
 ext {
     config = new Config()
     def basePath = rootDir.absolutePath + "/configuration/"
 
-    config.commonProperties = new Properties()
+    config.privateProperties = new Properties()
     def propertyFileName = "private-data.properties"
-    config.commonProperties.load(new FileInputStream(rootProject.file((basePath + propertyFileName))))
+    config.privateProperties.load(new FileInputStream(rootProject.file((basePath + propertyFileName))))
 }
 
 android {
     defaultConfig {
+
 
     }
 }
