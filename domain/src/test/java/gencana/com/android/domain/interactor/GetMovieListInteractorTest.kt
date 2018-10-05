@@ -3,9 +3,10 @@ package gencana.com.android.domain.interactor
 import gencana.com.android.domain.BaseTestClass
 import gencana.com.android.domain.TestLiveDataObserver
 import gencana.com.android.domain.model.Movie
+import gencana.com.android.domain.model.Paging
 import gencana.com.android.domain.repository.MovieRepository
 import gencana.com.android.domain.testObserver
-import io.reactivex.Observable
+import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import org.junit.Test
 import org.mockito.Mock
@@ -23,7 +24,8 @@ class GetMovieListInteractorTest: BaseTestClass(){
 
     private lateinit var interactor: GetMovieListInteractor
 
-    private  val movieListObservable = Observable.just(listOf(Movie(1), Movie(2)))
+    private  val movieListObservable = Single.just(
+            Paging(1, 1, 1, listOf(Movie(1), Movie(2))))
 
     private lateinit var liveData: TestLiveDataObserver<Boolean>
 
@@ -54,13 +56,6 @@ class GetMovieListInteractorTest: BaseTestClass(){
         interactor.getObservable(5)
         verify(repository).getMovieList(Mockito.anyInt())
         verifyNoMoreInteractions(repository)
-    }
-
-    @Test
-    fun `fail on null params`(){
-        expectedException.expect(NullPointerException::class.java)
-        interactor.getObservable(null)
-
     }
 
 

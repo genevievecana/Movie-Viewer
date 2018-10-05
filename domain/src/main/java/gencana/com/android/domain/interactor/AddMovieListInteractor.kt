@@ -15,8 +15,8 @@ class AddMovieListInteractor
         io: Scheduler)
     : UseCaseCompletable<List<Movie>>(io){
 
-    override fun getObservable(params: List<Movie>?): Completable{
-        return repository.insertMovieList(params!!)
+    override fun getObservable(params: List<Movie>): Completable{
+        return repository.insertMovieList(params)
     }
 
 }

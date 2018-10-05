@@ -1,0 +1,11 @@
+apply plugin: 'com.android.library'
+apply from: '../config-android.gradle'
+apply from: 'config-properties-data.gradle'
+
+
+dependencies {
+
+    dataDependencies()
+
+}
+

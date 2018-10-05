@@ -12,9 +12,9 @@ abstract class  UseCase<T, Params> (private val io: Scheduler){
 
     val loadingLiveData = MutableLiveData<Boolean>()
 
-    abstract fun getObservable(params: Params? = null): Observable<T>
+    protected abstract fun getObservable(params: Params): Observable<T>
 
-    fun execute(params: Params?) : Observable<T> {
+    fun execute(params: Params) : Observable<T> {
         return getObservable(params)
                 .doOnSubscribe { loadingLiveData.postValue(true) }
                 .doAfterTerminate { loadingLiveData.postValue(false) }
