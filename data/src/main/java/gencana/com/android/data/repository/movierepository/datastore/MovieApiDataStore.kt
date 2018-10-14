@@ -4,6 +4,7 @@ import gencana.com.android.data.entity.MovieDataEntity
 import gencana.com.android.data.remote.ApiService
 import gencana.com.android.data.entity.PagingDataEntity
 import io.reactivex.Completable
+import io.reactivex.Observable
 import io.reactivex.Single
 
 
@@ -19,6 +20,10 @@ class MovieApiDataStore(private val apiService: ApiService): MovieDataStore {
 
     override fun getMovieList(page: Int): Single<PagingDataEntity<MovieDataEntity>> {
         return apiService.getPopularMovieList(page)
+    }
 
+
+    override fun searchMovie(page: Int, query: String): Single<PagingDataEntity<MovieDataEntity>> {
+        return apiService.searchMovie(page, query)
     }
 }

@@ -15,4 +15,4 @@ fun Paging<Movie>.toPresentation(): PagingModel<MovieModel>
         = PagingModel(page, totalResults, totalPages, data?.map { it.toPresentation() })
 
 fun Movie.toPresentation(): MovieModel =
-        MovieModel(id, title, voteAverage, "$IMAGE_BASE_URL$posterPath")
+        MovieModel(id, title, voteAverage,  posterPath?.let { "$IMAGE_BASE_URL$it" } )

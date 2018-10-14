@@ -9,8 +9,8 @@ import gencana.com.android.movlancer.common.adapter.viewholder.factory.ViewHolde
 
 data class MovieModel(val id: Int,
                       val title: String,
-                      val voteAverage: Float,
-                      val posterPath: String)
+                      val voteAverage: Float?,
+                      val posterPath: String?)
     : ViewHolderInterface{
 
     override var viewType: Int? = ViewHolderEnum.ITEM.type

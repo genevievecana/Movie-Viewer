@@ -15,8 +15,7 @@ class MovieViewHolder(private val view: View) : RecyclerViewMultiAdapter.BaseVie
 
     override fun onBind(data: MovieModel, itemClickPublisher: PublishSubject<MovieModel>?) {
         GlideApp.with(view).load(data.posterPath).into(view.img_poster)
-        view.rating_bar.rating = data.voteAverage/2
-        view.rating_bar.alpha = 1f
+        view.rating_bar.rating = data.voteAverage?.let { it/2 } ?: 0f
         view.txt_title.text = data.title
     }
 

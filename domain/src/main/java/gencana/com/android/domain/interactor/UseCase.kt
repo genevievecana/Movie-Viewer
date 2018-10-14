@@ -1,5 +1,6 @@
 package gencana.com.android.domain.interactor
 
+import io.reactivex.Observable
 import io.reactivex.Single
 import java.security.InvalidParameterException
 

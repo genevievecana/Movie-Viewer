@@ -5,5 +5,5 @@ package gencana.com.android.domain.model
  */
 data class Movie(val id: Int,
                  val title: String,
-                 val voteAverage: Float,
-                 val posterPath: String)
+                 val voteAverage: Float?,
+                 val posterPath: String?)

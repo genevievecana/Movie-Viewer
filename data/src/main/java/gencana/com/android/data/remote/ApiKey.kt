@@ -6,7 +6,9 @@ package gencana.com.android.data.remote
 
 //Endpoints
 const val POPULAR_MOVIE_ENDPOINT = "movie/popular"
+const val SEARCH_ENDPOINT = "search/movie"
 
 //Parameters
 const val API_KEY = "api_key"
 const val FIELD_PAGE = "page"
+const val FIELD_QUERY = "query"

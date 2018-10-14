@@ -13,4 +13,6 @@ interface MovieDataStore {
     fun addMovieList(movieList: List<MovieDataEntity>): Completable
 
     fun getMovieList(page: Int) : Single<PagingDataEntity<MovieDataEntity>>
+
+    fun searchMovie(page: Int, query: String): Single<PagingDataEntity<MovieDataEntity>>
 }

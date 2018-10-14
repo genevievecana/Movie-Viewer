@@ -3,6 +3,7 @@ package gencana.com.android.data.remote
 import gencana.com.android.data.BuildConfig
 import gencana.com.android.data.entity.MovieDataEntity
 import gencana.com.android.data.entity.PagingDataEntity
+import io.reactivex.Observable
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -16,6 +17,12 @@ interface ApiService {
     @GET(POPULAR_MOVIE_ENDPOINT)
     fun getPopularMovieList(@Query(FIELD_PAGE) page: Int,
                             @Query(API_KEY) apiKey: String = BuildConfig.API_KEY)
+            : Single<PagingDataEntity<MovieDataEntity>>
+
+    @GET(SEARCH_ENDPOINT)
+    fun searchMovie(@Query(FIELD_PAGE) page: Int,
+                    @Query(FIELD_QUERY) query: String,
+                    @Query(API_KEY) apiKey: String = BuildConfig.API_KEY)
             : Single<PagingDataEntity<MovieDataEntity>>
 
 }

@@ -9,6 +9,6 @@ import se.ansman.kotshi.JsonSerializable
 @JsonSerializable
 data class MovieDataEntity(val id: Int,
                            val title: String,
-                           @Json(name = "vote_average") val voteAverage: Float,
-                           @Json(name = "poster_path") val posterPath: String)
+                           @Json(name = "vote_average") val voteAverage: Float?,
+                           @Json(name = "poster_path") val posterPath: String?)
     : PagingDataEntity<MovieDataEntity>()

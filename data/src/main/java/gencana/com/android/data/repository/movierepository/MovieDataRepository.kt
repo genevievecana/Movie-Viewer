@@ -32,4 +32,8 @@ class MovieDataRepository @Inject constructor(
         return dataStoreFactory.getMovieList(page).map { it.toDomain() }
     }
 
+    override fun searchMovie(page: Int, query: String): Single<Paging<Movie>> {
+        return dataStoreFactory.searchMovie(page, query).map { it.toDomain() }
+    }
+
 }

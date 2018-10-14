@@ -2,6 +2,7 @@ package gencana.com.android.movlancer.common.base
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
+import io.reactivex.Observable
 import io.reactivex.Scheduler
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -22,12 +23,17 @@ abstract class BaseViewModel<T, Params>(private val io: Scheduler) : ViewModel()
 
     protected abstract fun getObservable(params: Params): Single<T>
 
-    fun execute(params: Params){
-        addDisposable(getObservable(params)
+    fun switchMapDefaultExecute(single: Observable<Params>){
+        execute(single.switchMapSingle {  getObservable(it) })
+    }
+
+    fun execute(single: Observable<T>){
+        addDisposable(single
                 .subscribeOn(io)
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { loadingLiveData.postValue(true) }
                 .doAfterTerminate { loadingLiveData.postValue(false)}
+                .retry() //TODO: error handling
                 .subscribe({ result ->
                     responseLiveData.postValue(result)
                 }, { throwable ->
