@@ -16,6 +16,7 @@ def Group(Closure closure) {
     lifecycle()
     paging()
     rxjava()
+    glide()
     test()
  **/
 
@@ -89,6 +90,11 @@ ext{
         implementation deps.javax.inject
     }
 
+    glide = Group {
+        implementation deps.glide.glide
+        kapt deps.glide.glideCompiler
+    }
+
     test = Group {
         testImplementation deps.test.junit
         androidTestImplementation deps.test.testRunner
@@ -116,6 +122,7 @@ ext{
         lifecycle()
         paging()
         rxjava()
+        glide()
         test()
     }
 

@@ -24,7 +24,7 @@ class MovieDataRepository @Inject constructor(
 
     override fun insertMovieList(movieList: List<Movie>): Completable {
            return dataStoreFactory.addMovieList(movieList.map {
-               MovieDataEntity(it.id)
+               MovieDataEntity(it.id, it.title, it.voteAverage, it.posterPath)
            })
     }
 

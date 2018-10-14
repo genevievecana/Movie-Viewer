@@ -1,4 +1,4 @@
-package gencana.com.android.movlancer.constant
+package gencana.com.android.movlancer.common.constant
 
 import android.arch.lifecycle.ViewModel
 import dagger.MapKey

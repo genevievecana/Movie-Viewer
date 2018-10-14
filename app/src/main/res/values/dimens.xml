@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="xxsmall">3dp</dimen>
+    <dimen name="xsmall">5dp</dimen>
+    <dimen name="small">10dp</dimen>
+    <dimen name="normal">15dp</dimen>
+    <dimen name="medium">20dp</dimen>
+    <dimen name="stroke">1dp</dimen>
+    <dimen name="stroke_med">2dp</dimen>
+    <dimen name="card_radius">5dp</dimen>
+
+</resources>

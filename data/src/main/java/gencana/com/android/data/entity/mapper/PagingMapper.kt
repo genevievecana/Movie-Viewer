@@ -14,4 +14,4 @@ fun PagingDataEntity<MovieDataEntity>.toDomain(): Paging<Movie>
 
 
 fun MovieDataEntity.toDomain(): Movie =
-        Movie(id)
+        Movie(id, title, voteAverage, posterPath)

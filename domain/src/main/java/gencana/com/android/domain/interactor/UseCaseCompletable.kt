@@ -12,7 +12,7 @@ abstract class  UseCaseCompletable<Params> (private val io: Scheduler){
 
     val loadingLiveData = MutableLiveData<Boolean>()
 
-    protected abstract fun getObservable(params: Params): Completable
+    abstract fun getObservable(params: Params): Completable
 
     fun execute(params: Params) : Completable {
         return getObservable(params)

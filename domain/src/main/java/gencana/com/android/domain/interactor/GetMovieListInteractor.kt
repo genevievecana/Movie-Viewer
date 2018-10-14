@@ -3,8 +3,7 @@ package gencana.com.android.domain.interactor
 import gencana.com.android.domain.model.Movie
 import gencana.com.android.domain.model.Paging
 import gencana.com.android.domain.repository.MovieRepository
-import io.reactivex.Observable
-import io.reactivex.Scheduler
+import io.reactivex.Single
 import javax.inject.Inject
 
 /**
@@ -12,12 +11,10 @@ import javax.inject.Inject
  */
 class GetMovieListInteractor
 @Inject constructor(
-        private val repository: MovieRepository,
-        io: Scheduler)
-    : UseCase<Paging<Movie>, Int>(io){
+        private val repository: MovieRepository)
+    : UseCase<Paging<Movie>, Int>(){
 
-    override fun getObservable(params: Int): Observable<Paging<Movie>> {
-        return repository.getMovieList(params).toObservable()
+    override fun registerObservable(params: Int): Single<Paging<Movie>> {
+        return repository.getMovieList(params)
     }
-
 }

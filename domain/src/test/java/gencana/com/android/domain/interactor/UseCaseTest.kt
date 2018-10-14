@@ -7,6 +7,9 @@ import io.reactivex.Scheduler
 import io.reactivex.schedulers.Schedulers
 import org.junit.Test
 import gencana.com.android.domain.testObserver
+import io.reactivex.Single
+import io.reactivex.observers.TestObserver
+import java.security.InvalidParameterException
 import org.mockito.Mockito.`when` as whenever
 
 /**
@@ -17,39 +20,53 @@ class UseCaseTest: BaseTestClass(){
 
     private lateinit var useCase: UseCaseClass
 
-    private lateinit var liveData: TestLiveDataObserver<Boolean>
-
-
     override
     fun setup(){
-        useCase = UseCaseClass(Schedulers.trampoline())
+        useCase = UseCaseClass()
     }
 
     @Test
-    fun `test livedata values during execution`(){
-        liveData = useCase.loadingLiveData.testObserver()
-
-        useCase.execute(5)
-                .subscribe()
-
-        assertBuilder
-                .that(liveData.observedValues.size)
-                .isEqualTo(2)
-
-        assertBuilder
-                .that(liveData.observedValues)
-                .isEqualTo(listOf(true, false))
-
+    fun `test valid usecase`() {
+        val testObserver = TestObserver<String>()
+        useCase.getObservable(5).subscribe(testObserver)
+        assertBuilder.that(testObserver.assertResult("test"))
     }
 
-    private class UseCaseClass
-    constructor(io: Scheduler)
-        : UseCase<Int?, Int>(io){
+    @Test
+    fun `test invalid usecase`() {
+        val testObserver = TestObserver<String>()
+        useCase.getObservable(4).subscribe(testObserver)
+        assertBuilder.that(testObserver.assertError(InvalidParameterException::class.java))
+    }
 
-        override fun getObservable(params: Int): Observable<Int?> {
-            return Observable.just(params)
+    @Test
+    fun `test valid params`() {
+        val isValid = useCase.validateParams(5)
+        assertBuilder.that(isValid).isTrue()
+    }
+
+    @Test
+    fun `test invalid params`() {
+        val isValid = useCase.validateParams(4)
+        assertBuilder.that(isValid).isFalse()
+    }
+
+    @Test
+    fun `test nullable params`() {
+        val isValid = useCase.validateParams(null)
+        assertBuilder.that(isValid).isTrue()
+    }
+
+
+    private class UseCaseClass
+        : UseCase<String, Int?>(){
+        override fun registerObservable(params: Int?): Single<String> {
+            return Single.just("test")
         }
 
+        override fun validateParams(params: Int?): Boolean {
+            return params == 5 || params == null
+        }
     }
 
 }

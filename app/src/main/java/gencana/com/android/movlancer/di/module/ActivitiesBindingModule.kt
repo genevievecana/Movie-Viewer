@@ -2,7 +2,7 @@ package gencana.com.android.movlancer.di.module
 
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
-import gencana.com.android.movlancer.MainActivity
+import gencana.com.android.movlancer.ui.main.MainActivity
 
 /**
  * Created by Gen Cana on 05/10/2018

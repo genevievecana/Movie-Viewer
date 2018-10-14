@@ -62,6 +62,10 @@ ext.deps = [
                 'annotation'        :   "javax.annotation:jsr250-api:$versions.javaxAnnotation",
                 'inject'            :   "javax.inject:javax.inject:$versions.javaxInject"
         ],
+        'glide': [
+                'glide'             :   "com.github.bumptech.glide:glide:$versions.glideVersion",
+                'glideCompiler'     :   "com.github.bumptech.glide:compiler:$versions.glideVersion"
+        ],
         'test'      : [
                 'junit'             :   "junit:junit:$versions.junit",
                 'testRunner'        :   "com.android.support.test:runner:$versions.testRunner",

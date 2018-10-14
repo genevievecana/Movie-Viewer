@@ -5,9 +5,8 @@ import gencana.com.android.domain.TestLiveDataObserver
 import gencana.com.android.domain.model.Movie
 import gencana.com.android.domain.model.Paging
 import gencana.com.android.domain.repository.MovieRepository
-import gencana.com.android.domain.testObserver
 import io.reactivex.Single
-import io.reactivex.schedulers.Schedulers
+import io.reactivex.observers.TestObserver
 import org.junit.Test
 import org.mockito.Mock
 import org.mockito.Mockito
@@ -30,25 +29,25 @@ class GetMovieListInteractorTest: BaseTestClass(){
     private lateinit var liveData: TestLiveDataObserver<Boolean>
 
     override fun setup() {
-        interactor = GetMovieListInteractor(repository, Schedulers.trampoline())
+        interactor = GetMovieListInteractor(repository)
         `when`(repository.getMovieList(Mockito.anyInt())).thenReturn(movieListObservable)
     }
 
     @Test
     fun `test success getting movies`(){
-        liveData = interactor.loadingLiveData.testObserver()
-        interactor.execute(Mockito.anyInt())
-                .subscribe()
+        val testObserver = TestObserver<Paging<Movie>>()
+        val sampleResult = 75
+        val paging = Paging<Movie>(totalResults = sampleResult)
+        `when`(repository.getMovieList(Mockito.anyInt())).thenReturn(Single.just(paging))
+        interactor.getObservable(Mockito.anyInt())
+                .subscribe(testObserver)
+
+        assertBuilder.that(testObserver.assertValue{
+            it.totalResults == sampleResult
+        })
+        assertBuilder.that(testObserver.assertComplete())
         verify(repository).getMovieList(Mockito.anyInt())
         verifyNoMoreInteractions(repository)
-
-        assertBuilder
-                .that(liveData.observedValues.size)
-                .isEqualTo(2)
-
-        assertBuilder
-                .that(liveData.observedValues)
-                .isEqualTo(listOf(true, false))
     }
 
     @Test
