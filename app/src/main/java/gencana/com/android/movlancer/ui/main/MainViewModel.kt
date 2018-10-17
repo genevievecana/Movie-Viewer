@@ -2,13 +2,12 @@ package gencana.com.android.movlancer.ui.main
 
 import gencana.com.android.domain.interactor.GetMovieListInteractor
 import gencana.com.android.domain.interactor.SearchMovieInteractor
-import gencana.com.android.domain.model.Movie
-import gencana.com.android.domain.model.Paging
 import gencana.com.android.domain.model.SearchParams
 import gencana.com.android.movlancer.common.base.BaseViewModel
 import gencana.com.android.movlancer.common.mapper.toPresentation
 import gencana.com.android.movlancer.common.model.MovieModel
 import gencana.com.android.movlancer.common.model.PagingModel
+import gencana.com.android.movlancer.common.model.Result
 import io.reactivex.Observable
 import io.reactivex.Scheduler
 import io.reactivex.Single
@@ -24,13 +23,12 @@ class MainViewModel @Inject constructor(
         io: Scheduler)
     : BaseViewModel<PagingModel<MovieModel>, SearchParams>(io) {
 
-    override fun getObservable(params: SearchParams): Single<PagingModel<MovieModel>> {
-        return interactor.getObservable(params.page)
-                .map(Paging<Movie>::toPresentation)
-    }
+    override fun getObservable(params: SearchParams): Observable<Result<PagingModel<MovieModel>>>
+        = interactor.getObservable(params.page).toObservable()
+            .map{ Result(it.toPresentation()) }
 
-    fun searchObservable(params: SearchParams): Single<PagingModel<MovieModel>>{
-        return searchInteractor.getObservable(params).map(Paging<Movie>::toPresentation)
-    }
+    fun searchObservable(params: SearchParams): Single<Result<PagingModel<MovieModel>>>
+        = searchInteractor.getObservable(params)
+            .map{ Result(it.toPresentation())}
 
 }

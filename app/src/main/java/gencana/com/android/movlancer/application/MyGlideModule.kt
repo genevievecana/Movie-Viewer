@@ -5,7 +5,9 @@ import com.bumptech.glide.module.AppGlideModule
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.GlideBuilder
 import com.bumptech.glide.annotation.GlideModule
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import gencana.com.android.movlancer.R
 import gencana.com.android.movlancer.common.constant.IMAGE_RADIUS
 
 
@@ -22,7 +24,7 @@ class MyGlideModule: AppGlideModule(){
 
     private fun getDefaultRequestOptions(): RequestOptions
         = RequestOptions()
-                .fitCenter()
-                .transform(RoundedCorners(IMAGE_RADIUS))
+            .placeholder(R.drawable.image_placeholder)
+                .transforms(CenterCrop(), RoundedCorners(IMAGE_RADIUS))
 
 }

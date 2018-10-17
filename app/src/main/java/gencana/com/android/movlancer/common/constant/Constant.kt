@@ -6,4 +6,4 @@ package gencana.com.android.movlancer.common.constant
 
 const val IMAGE_SIZE = "w154"
 const val IMAGE_BASE_URL = "https://image.tmdb.org/t/p/$IMAGE_SIZE/"
-const val IMAGE_RADIUS = 30
+const val IMAGE_RADIUS = 20

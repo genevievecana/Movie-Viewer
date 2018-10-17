@@ -3,7 +3,7 @@
 
     <solid android:color="@android:color/transparent"/>
 
-    <stroke android:color="@android:color/black" android:width="@dimen/stroke"/>
+    <stroke android:color="@color/white_50" android:width="@dimen/stroke"/>
 
     <corners android:radius="@dimen/card_radius"/>
 

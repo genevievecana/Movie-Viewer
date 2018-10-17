@@ -9,6 +9,7 @@ import gencana.com.android.movlancer.R
 import gencana.com.android.movlancer.common.adapter.RecyclerViewMultiAdapter
 import gencana.com.android.movlancer.common.adapter.viewholder.factory.ViewHolderInterface
 import gencana.com.android.movlancer.common.base.BaseActivity
+import gencana.com.android.movlancer.common.extensions.addErrorHandler
 import gencana.com.android.movlancer.common.extensions.defaultMultiAdapter
 import gencana.com.android.movlancer.common.extensions.invisible
 import gencana.com.android.movlancer.common.extensions.show
@@ -28,8 +29,17 @@ class MainActivity : BaseActivity<MainViewModel, PagingModel<MovieModel>>() {
 
     override fun setupActivity(savedInstanceState: Bundle?) {
         setSupportActionBar(toolbar)
-        viewModel.switchMapDefaultExecute(Observable.just(SearchParams(1)))
         multiAdapter = recycler_view.defaultMultiAdapter(layoutManager = GridLayoutManager(this, 2))
+
+        val params = SearchParams()
+        viewModel.switchMapDefaultExecute(Observable.create<SearchParams>{ emitter ->
+            swipe_refresh.apply { setOnRefreshListener { emitter.onNext(params) } }
+            btn_retry.setOnClickListener {emitter.onNext(params)}
+            emitter.setCancellable {
+                swipe_refresh.setOnRefreshListener(null)
+                btn_retry.setOnClickListener(null)
+            }
+        }.startWith(params))
     }
 
     override fun showLoading(show: Boolean) {
@@ -72,7 +82,8 @@ class MainActivity : BaseActivity<MainViewModel, PagingModel<MovieModel>>() {
 
                         })
                     }
-                }.switchMapSingle { viewModel.searchObservable(it) }) }
+                }.flatMap { viewModel.searchObservable(it).toObservable().addErrorHandler()}) }
     }
+
 
 }
