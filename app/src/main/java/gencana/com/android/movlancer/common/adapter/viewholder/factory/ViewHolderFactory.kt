@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import gencana.com.android.movlancer.common.adapter.viewholder.HeaderViewHolder
 import gencana.com.android.movlancer.common.adapter.viewholder.MovieViewHolder
 
 /**
@@ -20,6 +21,7 @@ object ViewHolderFactory {
                 .inflate(viewTypeEnum.layout, parent, false)
         return when(viewTypeEnum){
             ViewHolderEnum.ITEM -> MovieViewHolder(view)
+            ViewHolderEnum.HEADER -> HeaderViewHolder(view)
         }
     }
 

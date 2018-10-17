@@ -7,10 +7,12 @@ import android.view.Menu
 import gencana.com.android.domain.model.SearchParams
 import gencana.com.android.movlancer.R
 import gencana.com.android.movlancer.common.adapter.RecyclerViewMultiAdapter
+import gencana.com.android.movlancer.common.adapter.viewholder.factory.ViewHolderInterface
 import gencana.com.android.movlancer.common.base.BaseActivity
 import gencana.com.android.movlancer.common.extensions.defaultMultiAdapter
 import gencana.com.android.movlancer.common.extensions.invisible
 import gencana.com.android.movlancer.common.extensions.show
+import gencana.com.android.movlancer.common.model.HeaderModel
 import gencana.com.android.movlancer.common.model.MovieModel
 import gencana.com.android.movlancer.common.model.PagingModel
 import io.reactivex.Observable
@@ -19,16 +21,15 @@ import kotlinx.android.synthetic.main.layout_error.*
 
 class MainActivity : BaseActivity<MainViewModel, PagingModel<MovieModel>>() {
 
-    private lateinit var multiAdapter: RecyclerViewMultiAdapter<MovieModel>
+    private lateinit var multiAdapter: RecyclerViewMultiAdapter<ViewHolderInterface>
 
 
     override val layout: Int = R.layout.activity_main
 
     override fun setupActivity(savedInstanceState: Bundle?) {
         setSupportActionBar(toolbar)
-        multiAdapter = recycler_view.defaultMultiAdapter(
-                layoutManager = GridLayoutManager(this, 2))
         viewModel.switchMapDefaultExecute(Observable.just(SearchParams(1)))
+        multiAdapter = recycler_view.defaultMultiAdapter(layoutManager = GridLayoutManager(this, 2))
     }
 
     override fun showLoading(show: Boolean) {
@@ -37,12 +38,15 @@ class MainActivity : BaseActivity<MainViewModel, PagingModel<MovieModel>>() {
 
     override fun onResponseSuccess(data: PagingModel<MovieModel>) {
         layout_error.show(false)
-        swipe_refresh.show()
-        multiAdapter.addItems(data.data!!)
+        recycler_view.show()
+
+        multiAdapter.addItem( HeaderModel(getString(R.string.header_movie)))
+        multiAdapter.addItem( HeaderModel(), false) //TODO: setspansizelookup instead
+        multiAdapter.addItems( data.data!!)
     }
 
     override fun onError(errorMsg: String?) {
-        swipe_refresh.invisible()
+        recycler_view.invisible()
         layout_error.show()
     }
 

@@ -41,8 +41,20 @@ class RecyclerViewMultiAdapter<E: ViewHolderInterface>(
         return itemList[position].viewType ?: ViewHolderEnum.ITEM.type
     }
 
-    fun addItems(items: List<E>){
-        itemList.clear()
+    //TODO: replace paging
+    fun addItem(item: E, isClear: Boolean = true){
+        if (isClear) {
+            itemList.clear()
+        }
+        itemList.add(item)
+        notifyDataSetChanged()
+    }
+
+    //TODO: replace paging
+    fun addItems(items: List<E>, isClear: Boolean = false){
+        if (isClear) {
+            itemList.clear()
+        }
         itemList.addAll(items)
         notifyDataSetChanged()
     }

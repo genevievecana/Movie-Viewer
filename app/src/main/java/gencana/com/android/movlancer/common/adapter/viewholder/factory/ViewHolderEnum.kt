@@ -8,7 +8,8 @@ import gencana.com.android.movlancer.R
 
 enum class ViewHolderEnum(val type: Int, val layout: Int) {
 
-    ITEM(0, R.layout.item_movie);
+    ITEM(0, R.layout.item_movie),
+    HEADER(1, R.layout.item_header);
 
 
     companion object {

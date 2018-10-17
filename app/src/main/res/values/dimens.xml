@@ -9,5 +9,6 @@
     <dimen name="stroke">1dp</dimen>
     <dimen name="stroke_med">2dp</dimen>
     <dimen name="card_radius">5dp</dimen>
-
+    <dimen name="image_radius">10dp</dimen>
+    <dimen name="text_header">16sp</dimen>
 </resources>
